@@ -161,7 +161,7 @@ public class Main {
                     System.out.println("Может он меня узнает");
                 }
                 else {
-                    neighbor.interactWith(yakov);
+                    yakov.interactWith(neighbor);
                     mother.interactWith(yakov);
                     System.out.println(yakov.getName() + "хочет навестить отца");
                 }
