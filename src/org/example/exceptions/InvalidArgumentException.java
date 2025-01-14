@@ -3,6 +3,6 @@ package org.example.exceptions;
 public class InvalidArgumentException extends Exception {
     @Override
     public String getMessage() {
-        return "Неправильное значение, Введите значение из диапазона";
+        return "Invalid value, Please enter a value from the range";
     }
 }
