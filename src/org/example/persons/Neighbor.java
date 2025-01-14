@@ -18,13 +18,17 @@ public class Neighbor extends Character implements InteractWithCharacter {
     @Override
     public void interactWith(Character other) {
         if (other.getLocation() == this.getLocation()) {
-            if (other instanceof Yakov){
-                System.out.println(other.getName() + " тебе " + other.getAge() + ". Как ты можешь себя так вести.");
-                if(Math.random() <= 0.1){
-                    other.setHP(other.getHP() - 10);
-                    System.out.println(other.getName() + "теряет 10 здоровья");
+            if (other instanceof Yakov) {
+                if (this.getEmotion() == Emotion.ANGRY) {
+                    System.out.println(other.getName() + " тебе " + other.getAge() + ". Как ты можешь себя так вести.");
+                    if (Math.random() <= 0.1) {
+                        other.setHP(other.getHP() - 10);
+                        System.out.println(this.getName() + " царапает лицо " + other.getName() + " и он теряет 10 здоровья");
+                    }
+                } else {
+                    System.out.println(other.getName() + ", молодец, что помогаешь своей маме");
+                    this.setEmotion(Emotion.APPROVAL);
                 }
-                other.setEmotion(Emotion.CONFUSED);
             }
         } else {
             System.out.println(this.getName() + " не встречает " + other.getName());

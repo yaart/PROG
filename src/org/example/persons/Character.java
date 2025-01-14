@@ -55,6 +55,7 @@ public abstract class Character {
     }
 
     public void setLocation(Location location){
+        System.out.println(this.getName() + " приходит к " + location);
         this.location = location;
 
     }

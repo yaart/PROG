@@ -6,7 +6,7 @@ public interface InventoryYakov {
 
     void addItemToInventory(Goods good);
 
-    String removeRandomItemFromInventory();
+    Goods removeRandomItemFromInventory();
 
     void showInventory();
 }

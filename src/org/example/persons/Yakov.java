@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Yakov extends Character implements InventoryYakov, Arguable, InteractWithCharacter, Eat, Sleep {
 
-    private List<Goods> inventory;
+    private final List<Goods> inventory;
     private boolean isOffend;
 
     public Yakov(String name, int age, Emotion emotion, Location location) {
@@ -40,26 +40,28 @@ public class Yakov extends Character implements InventoryYakov, Arguable, Intera
     }
 
     @Override
-    public String removeRandomItemFromInventory() {
+    public Goods removeRandomItemFromInventory() {
         if (inventory.isEmpty()) {
-            return "У Якова ничего нет.";
+            return null;
         } else {
             Random random = new Random();
             int randomIndex = random.nextInt(inventory.size());
             Goods good = inventory.get(randomIndex);
+
             good.setCount(good.getCount() - 1);
-            if (Math.random() >= 0.8) {
-                return this.getName() + " уронил и разбил: " + good.getName();
-            } else {
-                return this.getName() + " выложил: " + good.getName();
+            if (good.getCount() == 0){
+                this.inventory.remove(good);
             }
+            System.out.println(this.getName() + " берет в руки " + good.getName());
+            return new Goods(good.getName(), good.getMaxCount(), good.getDamage(), good.getCost());
+
         }
     }
 
     @Override
     public void showInventory() {
         if (inventory.isEmpty()) {
-            System.out.println(getName() + " у Якова ничего нет(");
+            System.out.println("у Якова ничего нет");
         } else {
             System.out.println(getName() + " имеет при себе:");
             for (Goods good : inventory) {
@@ -72,11 +74,10 @@ public class Yakov extends Character implements InventoryYakov, Arguable, Intera
     public void argue(Character other) {
         System.out.println(getName() + " ссорится с " + other.getName() + ": 'Ты даже не понимаешь, как мне тяжело!'");
         if (Math.random() <= 0.7) {
-            other.setEmotion(Emotion.SAD);
+            this.setEmotion(Emotion.SAD);
         } else {
-            other.setEmotion(Emotion.CONFUSED);
+            this.setEmotion(Emotion.CONFUSED);
         }
-
     }
 
     @Override
@@ -111,7 +112,5 @@ public class Yakov extends Character implements InventoryYakov, Arguable, Intera
     public void sleep() {
         System.out.println(this.getName() + " поспал");
         this.setHP(this.getHP() + 50);
-        if (Math.random() <= 0.1){
-            this.setEmotion(Emotion.NEUTRAL);}
     }
 }

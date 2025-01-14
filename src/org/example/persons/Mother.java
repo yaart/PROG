@@ -23,7 +23,6 @@ public class Mother extends Character implements InteractWithCharacter {
                     other.setEmotion(Emotion.CONFUSED);
                 } else{
                     System.out.println(this.getName() + " узнает " + other.getName());
-                    other.setEmotion(Emotion.NEUTRAL);
                 }
 
             }
